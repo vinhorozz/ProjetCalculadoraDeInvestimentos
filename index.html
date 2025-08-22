@@ -12,25 +12,25 @@
     <aside class="bg-red-900 row-span-2 flex flex-col  justify-between py-2 px-2">
       <h1 class="text-4xl text-white m-5 p-2">Calculadora de Investimentos</h1>        
 
-      <form class="w-full">
+      <form id="formInvestiment" class="w-full">
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold" for="startingAmount">Investimento inicial</label>
         <div class="flex w-full ">
           <input class="h-10 bg-blue-200 w-1/6 rounded-l-md" type="text" value="R$" disabled/>
-          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 px-2" step="1000" min="0" a type="number" id="startingAmount"/>          
+          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 px-2" step="1000" min="0" a type="number" id="startingAmount" placeholder="0,00" required />          
         </div>
         </div>
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold" for="additionalIncomes">Aportes adicionais</label>
         <div class="flex w-full">
           <input class="h-10 bg-blue-200 w-1/6 rounded-l-md" type="text" value="R$" disabled/>
-          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md px-2" min="0" step="1000" type="number" id="additionalIncomes"/>          
+          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md px-2" min="0" step="1000" type="number" id="additionalIncomes" placeholder="0,00"/>          
         </div>
         </div>
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold" for="period">Prazo</label>
         <div class="flex w-full">          
-          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md px-2" min="0" type="number" id="period"/>
+          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md px-2" min="0" type="number" id="period" required/>
           <select id="evaluatePeriod" class="bg-blue-400 w-2/6 rounded-r-md font-semibold hover:bg-blue-900 hover:text-white">
             <option value="monthly">meses</option>
             <option value="yearly">anos</option>
@@ -41,7 +41,7 @@
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold" for="interestRates">Rentabilidade</label>
         <div class="flex w-full">
-          <input class="h-10 bg-blue-300 w-3/6 rounded-l-md px-2" min="0" type="number" id="interestRates"/>
+          <input class="h-10 bg-blue-300 w-3/6 rounded-l-md px-2" min="0" type="number" id="interestRates" required/>
           <input class="h-10 bg-blue-200 w-1/6 text-center" type="text" value="%" disabled/>          
           <select id="ratePeriod" class="bg-blue-400 w-2/6 rounded-r-md font-semibold hover:bg-blue-900 hover:text-white">
             <option value="monthly">mensal</option>
@@ -53,7 +53,7 @@
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold" for="fees">Impostos sobre lucro</label>
         <div class="flex w-full">          
-          <input class="h-10 bg-blue-300 w-5/6 rounded-l-md px-2" min="0" type="number" id="fees"/>          
+          <input class="h-10 bg-blue-300 w-5/6 rounded-l-md px-2" min="0" type="number" id="fees" required/>          
           
           <input class="h-10 bg-blue-200 w-1/6 rounded-r-md text-center" type="text" value="%" disabled/>
         </div>
@@ -61,7 +61,7 @@
       </form>
 
       <div class="flex w-full flex-col gap-1">
-        <button id="calculate_returns" class="text-white h-10 bg-blue-500 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium ">Calcular</button>
+        <button id="calculate_returns" form="formInvestiment" class="text-white h-10 bg-blue-500 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium ">Calcular</button>
         <button class="text-white h-10 bg-blue-500 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium  ">Limpar</button>
       </div>
       </div>
