@@ -1,4 +1,4 @@
-import { generateReturnsArray } from "./investmentGoals";
+import { generateReturnsArray } from "./investmentGoals.js";
 
 const form=document.getElementById("formInvestment");
 const btn_clear=document.getElementById("clearForm")
