@@ -1,12 +1,17 @@
+import { Chart} from "chart.js/auto";
 import { generateReturnsArray } from "./investmentGoals.js";
+ 
+
 
 const form=document.getElementById("formInvestment");
-const btn_clear=document.getElementById("clearForm")
+const btnClear=document.getElementById("clearForm");
+const shareAmountChart=document.getElementById("shareAmountChart");
+const growthAmountChart=document.getElementById("growthAmountChart");
 
 function renderProgression(e) {
     e.preventDefault();
 
-    if(document.querySelector(".error")){
+    if(document.querySelector(".error")){        
         return;
     }
 
@@ -19,7 +24,25 @@ function renderProgression(e) {
     const fees=Number(document.getElementById("fees").value.replace(",","."));
     const returnsArray= generateReturnsArray(startingAmount,additionalIncomes,period,evaluatePeriod,interestRates,ratePeriod,fees)
 
-    console.log(returnsArray);
+     console.log(returnsArray);
+
+    console.log(returnsArray[returnsArray.length -1])
+
+    new Chart(
+        shareAmountChart,
+        {
+        type: 'doughnut',
+        data: {labels: ['IMPOSTO','BRUTO','LIQUIDO'],
+            datasets: [{
+            label: 'My First Dataset',
+            data: [300, 50, 100],
+            backgroundColor: ['rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 205, 86)'
+                              ],
+            hoverOffset: 4}]
+            }
+        })
 }
 
 function clearForm() {
@@ -67,5 +90,6 @@ for(const formElement of form){
     }
 }
 
-form.addEventListener("submit",renderProgression)
-btn_clear.addEventListener("click",clearForm)
+
+btnClear.addEventListener("click",clearForm);
+form.addEventListener("submit",renderProgression);
