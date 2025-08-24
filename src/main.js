@@ -7,6 +7,11 @@ const form=document.getElementById("formInvestment");
 const btnClear=document.getElementById("clearForm");
 const shareAmountChart=document.getElementById("shareAmountChart");
 const growthAmountChart=document.getElementById("growthAmountChart");
+ 
+function currencyApply(value){
+    return value.toFixed(2);    
+}
+
 
 function renderProgression(e) {
     e.preventDefault();
@@ -24,22 +29,27 @@ function renderProgression(e) {
     const fees=Number(document.getElementById("fees").value.replace(",","."));
     const returnsArray= generateReturnsArray(startingAmount,additionalIncomes,period,evaluatePeriod,interestRates,ratePeriod,fees)
 
-     console.log(returnsArray);
+    //  console.log(returnsArray);
 
-    console.log(returnsArray[returnsArray.length -1])
+    const finalInvestmentObject=(returnsArray[returnsArray.length -1])
 
+    const investedAmount=currencyApply(finalInvestmentObject.investedAmount);
+    const returnAmount=currencyApply(finalInvestmentObject.totalInterestReturns*(1-fees/100));
+    const fee=currencyApply(finalInvestmentObject.totalInterestReturns*(fees/100));
+    
+    
+console.log(currencyApply(finalInvestmentObject.investedAmount))
     new Chart(
         shareAmountChart,
         {
         type: 'doughnut',
-        data: {labels: ['IMPOSTO','BRUTO','LIQUIDO'],
+        data: {labels: ["Investido","Retorno","Imposto"],
             datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
+            // label: 'My First Dataset',
+            data: [investedAmount,returnAmount,fee],
             backgroundColor: ['rgb(255, 99, 132)',
                               'rgb(54, 162, 235)',
-                              'rgb(255, 205, 86)'
-                              ],
+                              'rgb(255, 205, 86)'],
             hoverOffset: 4}]
             }
         })
