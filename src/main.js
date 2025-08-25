@@ -1,25 +1,24 @@
 import { Chart} from "chart.js/auto";
 import { generateReturnsArray } from "./investmentGoals.js";
- 
-
-
 const form=document.getElementById("formInvestment");
 const btnClear=document.getElementById("clearForm");
 const shareAmountChart=document.getElementById("shareAmountChart");
 const growthAmountChart=document.getElementById("growthAmountChart");
- 
+let doughnutChart={};
+let progressionChart={};
+
 function currencyApply(value){
     return value.toFixed(2);    
 }
 
-
 function renderProgression(e) {
     e.preventDefault();
-
+    
     if(document.querySelector(".error")){        
         return;
     }
-
+    resetCharts();
+    
     const startingAmount=Number(document.getElementById("startingAmount").value.replace(",","."));
     const additionalIncomes=Number(document.getElementById("additionalIncomes").value.replace(",","."));    
     const period=Number(document.getElementById("period").value);  
@@ -28,18 +27,13 @@ function renderProgression(e) {
     const ratePeriod=document.getElementById("ratePeriod").value;    
     const fees=Number(document.getElementById("fees").value.replace(",","."));
     const returnsArray= generateReturnsArray(startingAmount,additionalIncomes,period,evaluatePeriod,interestRates,ratePeriod,fees)
-
-    //  console.log(returnsArray);
-
     const finalInvestmentObject=(returnsArray[returnsArray.length -1])
-
     const investedAmount=currencyApply(finalInvestmentObject.investedAmount);
     const returnAmount=currencyApply(finalInvestmentObject.totalInterestReturns*(1-fees/100));
     const fee=currencyApply(finalInvestmentObject.totalInterestReturns*(fees/100));
     
-    
-console.log(currencyApply(finalInvestmentObject.investedAmount))
-    new Chart(
+
+ doughnutChart=   new Chart(
         shareAmountChart,
         {
         type: 'doughnut',
@@ -47,22 +41,71 @@ console.log(currencyApply(finalInvestmentObject.investedAmount))
             datasets: [{
             // label: 'My First Dataset',
             data: [investedAmount,returnAmount,fee],
-            backgroundColor: ['rgb(255, 99, 132)',
+            backgroundColor: ['rgb(256, 99, 132)',
                               'rgb(54, 162, 235)',
                               'rgb(255, 205, 86)'],
             hoverOffset: 4}]
             }
         })
+
+progressionChart =new Chart(growthAmountChart, {
+    type: 'bar',
+    data: {
+        labels: returnsArray.map(a => a.month),
+        datasets: [
+            {
+                label: "Total investido",
+                data: returnsArray.map(a => currencyApply(a.investedAmount)),
+                backgroundColor: 'rgb(256, 99, 132)',
+            },
+            {
+                label: "Retorno do Investimento",
+                data:  returnsArray.map(a => currencyApply(a.totalAmount)),
+                backgroundColor: 'rgb(54, 162, 235)',
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return 'R$ ' + value.toLocaleString('pt-BR');
+                    }
+                }
+            }
+        }
+    }
+});
+
+
 }
 
-function clearForm() {
- 
+function isObjectEmpty(obj) {
+   return Object.keys(obj).length===0; 
+}
+
+function resetCharts() {
+    if (!isObjectEmpty(doughnutChart) && !isObjectEmpty(progressionChart)){
+        doughnutChart.destroy();   
+        progressionChart.destroy();
+    }
+}
+
+function clearForm() { 
     form["startingAmount"].value="";
     form["additionalIncomes"].value="";
     form["period"].value="";
     form["interestRates"].value="";
     form["fees"].value="";
         
+    resetCharts();
+
     const errorInputs=document.querySelectorAll('.error');//criar uma lista com erros
 
     for(const errorInput of errorInputs){//tratar cada erro da lista
