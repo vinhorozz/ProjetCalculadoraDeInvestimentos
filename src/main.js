@@ -41,10 +41,9 @@ function renderProgression(e) {
             datasets: [{
             // label: 'My First Dataset',
             data: [investedAmount,returnAmount,fee],
-            backgroundColor: ['rgb(256, 99, 132)',
-                              'rgb(54, 162, 235)',
-                              'rgb(255, 205, 86)'],
-            hoverOffset: 4}]
+            backgroundColor: ['blue','green',"red" ],            
+            hoverOffset: 4,
+            borderWidth: 0}]
             }
         })
 
@@ -56,12 +55,12 @@ progressionChart =new Chart(growthAmountChart, {
             {
                 label: "Total investido",
                 data: returnsArray.map(a => currencyApply(a.investedAmount)),
-                backgroundColor: 'rgb(256, 99, 132)',
+                backgroundColor: 'blue',//'rgb(256, 99, 132)',
             },
             {
                 label: "Retorno do Investimento",
                 data:  returnsArray.map(a => currencyApply(a.totalAmount)),
-                backgroundColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'green'//'rgb(54, 162, 235)',
             }
         ]
     },
