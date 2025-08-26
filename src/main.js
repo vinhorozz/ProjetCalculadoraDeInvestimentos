@@ -153,4 +153,4 @@ for(const formElement of form){
 
 
 btnClear.addEventListener("click",clearForm);
-form.addEventListener("submit",renderProgression);
+// form.addEventListener("submit",renderProgression);
