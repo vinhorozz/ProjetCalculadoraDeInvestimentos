@@ -9,7 +9,7 @@
   </head>
   <body class="bg-blue-300 grid grid-cols-3 grid-rows-2 h-[100dvh]">
 
-    <aside class="bg-red-700 row-span-2 flex flex-col  justify-between py-2 px-2">
+    <aside class="bg-red-700 row-span-2 flex flex-col justify-between py-2 px-2">
       <h1 class="text-4xl text-white m-5 p-2">Calculadora de Investimentos</h1>        
 
       <form id="formInvestment" class="w-full">
@@ -63,21 +63,22 @@
       <div class="flex w-full flex-col gap-1">
         <button id="calculate_returns" form="formInvestment" class="text-white h-10 bg-blue-500 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium ">Calcular</button>
         <button id="clearForm" class="text-white h-10 bg-blue-500 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium  ">Limpar</button>
-      </div>
+      </div>                
+    </div>
       </div>
 
     </aside>
-   <main class="h-full flex flex-1">
+   <main class="row-span-2 col-span-2">
       
-        <section id="charts-container" class="h-full">          
-            <div class="h-[36dvh] mx-10">
-              <p class="text-2xl font-semibold text-white ml-5.5">Resultado</p>
-              <canvas id="shareAmountChart" class="m-1 w-full h-full"></canvas>
+        <section id="charts-container" class="h-full place-content-between gap-2">          
+            <div class="h-[36%] flex flex-col items-center pb-10 mb-5" >
+              <p class="text-2xl font-semibold text-blue-700 pt-5">Resultado</p>
+              <canvas id="shareAmountChart" class="w-full h-full m-1"></canvas>
             </div>
 
-            <div class="h-[56dvh] m-10">
-              <p class="text-2xl font-semibold text-white ml-5.5">Progressão</p>
-              <canvas id="growthAmountChart" class="m-1 w-full h-full"></canvas>
+            <div class="h-[46%] flex flex-col items-center pb-10 mb-5">
+              <p class="text-2xl font-semibold text-blue-700 pt-5">Progressão</p>
+              <canvas id="growthAmountChart" class="w-full m-1"></canvas>
             </div>
         </section>
         
