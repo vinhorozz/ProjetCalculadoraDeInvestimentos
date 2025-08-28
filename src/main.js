@@ -1,5 +1,7 @@
 import { Chart} from "chart.js/auto";
 import { generateReturnsArray } from "./investmentGoals.js";
+import { createTable } from "./table.js";
+
 const form=document.getElementById("formInvestment");
 const btnClear=document.getElementById("clearForm");
 const shareAmountChart=document.getElementById("shareAmountChart");
@@ -7,8 +9,16 @@ const growthAmountChart=document.getElementById("growthAmountChart");
 let doughnutChart={};
 let progressionChart={};
 
-function currencyApply(value){
-    return value.toFixed(2);    
+const columnsArray=[
+    {columnLabel: "Mês", accessor: "month"},
+    {columnLabel: "Total Investido", accessor: "investedAmount",format:(a)=>currencyApply(a,true)},
+    {columnLabel: "Rendimento Mensal", accessor: "interestReturns",format:(a)=>currencyApply(a,true)},
+    {columnLabel: "Rendimento Total", accessor: "totalInterestReturns",format:(a)=>currencyApply(a,true)},
+    {columnLabel: "Quantia Total", accessor: "totalAmount",format:(a)=>currencyApply(a,true)}    
+]
+
+function currencyApply(value,currency=false){    
+   return !currency ? value.toFixed(2):value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})
 }
 
 function renderProgression(e) {
@@ -26,71 +36,69 @@ function renderProgression(e) {
     const interestRates=Number(document.getElementById("interestRates").value.replace(",","."));
     const ratePeriod=document.getElementById("ratePeriod").value;    
     const fees=Number(document.getElementById("fees").value.replace(",","."));
-    const returnsArray= generateReturnsArray(startingAmount,additionalIncomes,period,evaluatePeriod,interestRates,ratePeriod,fees)
-    const finalInvestmentObject=(returnsArray[returnsArray.length -1])
+    const returnsArray= generateReturnsArray(startingAmount,additionalIncomes,period,evaluatePeriod,interestRates,ratePeriod,fees);
+    const finalInvestmentObject=(returnsArray[returnsArray.length -1]);
     const investedAmount=currencyApply(finalInvestmentObject.investedAmount);
     const returnAmount=currencyApply(finalInvestmentObject.totalInterestReturns*(1-fees/100));
     const fee=currencyApply(finalInvestmentObject.totalInterestReturns*(fees/100));
     
 
- doughnutChart=   new Chart(
-        shareAmountChart,
-        {
-        type: 'doughnut',
-        data: {labels: ["Investido","Retorno","Imposto"],
-            datasets: [{
-            // label: 'My First Dataset',
-            data: [investedAmount,returnAmount,fee],
-            backgroundColor: ['blue','green',"red" ],            
-            hoverOffset: 10,
-            borderWidth: 0}]
-            },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // 🔥 permite ao gráfico usar toda a div
-            layout: {
-                padding: 20 // 🔥 adiciona espaço extra para não cortar
-            }
-}
+//  doughnutChart=   new Chart(
+//         shareAmountChart,
+//         {
+//         type: 'doughnut',
+//         data: {labels: ["Investido","Retorno","Imposto"],
+//             datasets: [{
+//             // label: 'My First Dataset',
+//             data: [investedAmount,returnAmount,fee],
+//             backgroundColor: ['blue','green',"red" ],            
+//             hoverOffset: 10,
+//             borderWidth: 0}]
+//             },
+//         options: {
+//             responsive: true,
+//             maintainAspectRatio: false, // 🔥 permite ao gráfico usar toda a div
+//             layout: {
+//                 padding: 20 // 🔥 adiciona espaço extra para não cortar
+//             }
+// }            
+//         })
 
-            
-        })
-
-progressionChart =new Chart(growthAmountChart, {
-    type: 'bar',
-    data: {
-        labels: returnsArray.map(a => a.month),
-        datasets: [
-            {
-                label: "Total investido",
-                data: returnsArray.map(a => currencyApply(a.investedAmount)),
-                backgroundColor: 'blue'
-            },
-            {
-                label: "Retorno do Investimento",
-                data:  returnsArray.map(a => currencyApply(a.totalAmount)),
-                backgroundColor: 'green'
-            },
-        ]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            x: {
-                stacked: true
-            },
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    callback: function(value) {
-                        return 'R$ ' + value.toLocaleString('pt-BR');
-                    }
-                }
-            }
-        }
-    }
-});
-
+// progressionChart =new Chart(growthAmountChart, {
+//     type: 'bar',
+//     data: {
+//         labels: returnsArray.map(a => a.month),
+//         datasets: [
+//             {
+//                 label: "Total investido",
+//                 data: returnsArray.map(a => currencyApply(a.investedAmount)),
+//                 backgroundColor: 'blue'
+//             },
+//             {
+//                 label: "Retorno do Investimento",
+//                 data:  returnsArray.map(a => currencyApply(a.totalAmount)),
+//                 backgroundColor: 'green'
+//             },
+//         ]
+//     },
+//     options: {
+//         responsive: true,
+//         scales: {
+//             x: {
+//                 stacked: true
+//             },
+//             y: {
+//                 beginAtZero: true,
+//                 ticks: {
+//                     callback: function(value) {
+//                         return 'R$ ' + value.toLocaleString('pt-BR');
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// });
+createTable(columnsArray, returnsArray,'results-table');
 
 }
 
@@ -113,6 +121,7 @@ function clearForm() {
     form["fees"].value="";
         
     resetCharts();
+    //Função deve ser ajustada para não criar  tabela dentra de tabela (limpar os dados)
 
     const errorInputs=document.querySelectorAll('.error');//criar uma lista com erros
 
@@ -153,4 +162,4 @@ for(const formElement of form){
 
 
 btnClear.addEventListener("click",clearForm);
-// form.addEventListener("submit",renderProgression);
+ form.addEventListener("submit",renderProgression);
