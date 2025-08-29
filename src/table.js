@@ -16,7 +16,7 @@ export const createTable=(columnsArray,dataArray, tableId)=>{
     createTableHeader(tableElement,columnsArray);
     createTableBody(tableElement,dataArray,columnsArray);
 }
-// --------------------------------------------------------------------------------------------------------
+
 function createTableHeader(tableReference,columnsArray) { //Função deve ser ajustada para não criar cabeçalho dentro de tabela qua já está na página(limpar os dados)
     const tableHeaderElement=tableReference.querySelector("thead");    
     if(!tableHeaderElement){        
@@ -34,7 +34,7 @@ function createTableHeader(tableReference,columnsArray) { //Função deve ser aj
     tableHeaderElement.appendChild(headerRow);
     }
 }
-// --------------------------------------------------------------------------------------------------------
+
 function createTableBody(tableReference,tableItems, columnsArray) { //Função deve ser ajustada para não criar um nova tabela dentro de tabela qua já está na página(limpar os dados)
     let tableBodyElement=tableReference.querySelector("tbody");
 
@@ -56,10 +56,8 @@ function createTableBody(tableReference,tableItems, columnsArray) { //Função d
         }
         tableBodyElement.appendChild(tableRow);    
     }
+}
 
-    }
-
-// --------------------------------------------------------------------------------------------------------
-function cleantables(){
-    
+export function cleanTables(){    
+    document.getElementById("results-table").replaceChildren();
 }

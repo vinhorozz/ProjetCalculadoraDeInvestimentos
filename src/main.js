@@ -1,6 +1,8 @@
 import { Chart} from "chart.js/auto";
 import { generateReturnsArray } from "./investmentGoals.js";
 import { createTable } from "./table.js";
+import{cleanTables}from"./table.js";
+
 
 const form=document.getElementById("formInvestment");
 const btnClear=document.getElementById("clearForm");
@@ -121,6 +123,7 @@ function clearForm() {
     form["fees"].value="";
         
     resetCharts();
+    cleanTables();
     //Função deve ser ajustada para não criar  tabela dentra de tabela (limpar os dados)
 
     const errorInputs=document.querySelectorAll('.error');//criar uma lista com erros
