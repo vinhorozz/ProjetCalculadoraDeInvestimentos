@@ -69,8 +69,8 @@
 
     </aside>
    <main class="row-span-2 col-span-2">
-      
-        <!-- <section id="charts-container" class="h-full place-content-between gap-2">          
+      <div id="carousel" class = "h-full w-full flex overflow-x-auto">
+        <section id="charts-container" class=" basis-full shrink-0 full h-full place-content-between gap-2">          
             <div class="h-[36%] flex flex-col items-center pb-10 mb-5" >
               <p class="text-2xl font-semibold text-blue-700 pt-5">Resultado</p>
               <canvas id="shareAmountChart" class="w-full h-full m-1"></canvas>
@@ -80,18 +80,19 @@
               <p class="text-2xl font-semibold text-blue-700 pt-5">Progressão</p>
               <canvas id="growthAmountChart" class="w-full m-1"></canvas>
             </div>
-        </section> -->
+        </section>
 
-        <section class="h-full overflow-y-auto">
+        <section id="table-container" class="basis-full shrink-0  h-full overflow-y-auto">
           <div class="h-full flex flex-col items-center pb-10 mb-5" >
           <p class="text-2xl font-semibold text-blue-700 pt-5 text-center">Resultados Mensais</p>
           <table id="results-table" class="w-full max-h-full border-0 border-separate">            
           </table>
           </div>
         </section>
-
+      </div>
         
     </main>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
+git 
