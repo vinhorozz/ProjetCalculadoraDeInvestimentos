@@ -160,6 +160,19 @@ for(const formElement of form){
         formElement.addEventListener("blur",validateInput);                
     }
 }
+const mainElement=document.getElementById("main");
+const carouselElement=document.getElementById("carousel");
+const btnPreview=document.getElementById("slide-arrow-preview");
+const btnNext=document.getElementById("slide-arrow-next");
+
+
+    btnNext.addEventListener("click",()=>
+        carouselElement.scrollLeft+=mainElement.clientWidth);
+
+    btnPreview.addEventListener("click",()=>
+        carouselElement.scrollLeft-=mainElement.clientWidth);
+
+
 
 btnClear.addEventListener("click",clearForm);
 form.addEventListener("submit",renderProgression);

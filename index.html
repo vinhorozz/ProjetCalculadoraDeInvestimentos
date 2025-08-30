@@ -68,8 +68,10 @@
       </div>
 
     </aside>
-   <main class="row-span-2 col-span-2">
-      <div id="carousel" class = "h-full w-full flex overflow-x-auto">
+   <main id="main"  class="row-span-2 col-span-2 relative">
+        <button id="slide-arrow-preview" class="absolute top-0 bottom-0 left-0 text-5xl cursor-pointer bg-slate-10 opacity-15 w-8 hover:opacity-100 ">&#8249;</button>
+        <button id="slide-arrow-next" class="absolute top-0 bottom-0 right-0 text-5xl  cursor-pointer bg-slate-10 opacity-15 w-8 hover:opacity-100 focus:opacity-100"> &#8250;</button>
+      <div id="carousel" class = "h-full w-full flex overflow-x-auto scroll-smooth-3">
         <section id="charts-container" class=" basis-full shrink-0 full h-full place-content-between gap-2">          
             <div class="h-[36%] flex flex-col items-center pb-10 mb-5" >
               <p class="text-2xl font-semibold text-blue-700 pt-5">Resultado</p>
@@ -95,4 +97,3 @@
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
-git 
