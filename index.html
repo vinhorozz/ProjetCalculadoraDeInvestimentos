@@ -9,30 +9,30 @@
   </head>
   <body class="bg-blue-300 grid grid-cols-3 grid-rows-2 h-[100dvh]">
 
-    <aside class="bg-red-700 row-span-2 flex flex-col justify-between py-2 px-2">
-      <h1 class="text-4xl text-white m-5 p-2">Calculadora de Investimentos</h1>        
+    <aside class="bg-linear-to-tr from-blue-500 to-indigo-600  row-span-2 flex flex-col justify-between py-2 px-2 shadow-xl/100">
+      <h1 class="text-4xl text-white autofill:max-w-full text-shadow-lg  m-5 p-2">Calculadora de Investimentos</h1>        
 
       <form id="formInvestment" class="w-full">
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="startingAmount">Investimento inicial</label>
-        <div class="flex w-full ">
-          <input class="h-10 bg-blue-200 w-1/6 rounded-l-md" type="text" value="R$" disabled/>
-  <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 px-2" step="1000" min="0" type="text" id="startingAmount" name="startingAmount" placeholder="0,00" value="1000" required/>          
+        <div class="flex w-full shadow-xl/30 ">
+          <input class="h-10 bg-blue-200 w-1/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500/50 " type="text" value="R$" disabled/>
+  <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 text-center inset-shadow-sm inset-shadow-indigo-500 " step="1000" min="0" type="text" id="startingAmount" name="startingAmount" placeholder="0,00" value="1000" required/>          
         </div>
         </div>
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="additionalIncomes">Aportes adicionais</label>
-        <div class="flex w-full">
-          <input class="h-10 bg-blue-200 w-1/6 rounded-l-md" type="text" value="R$" disabled/>
-          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md px-2" min="0" step="1000" type="text" id="additionalIncomes" name="additionalIncomes" placeholder="0,00" value="1000" />          
+        <div class="flex w-full shadow-xl/30">
+          <input class="h-10 bg-blue-200 w-1/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500/50" type="text" value="R$" disabled/>
+          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" step="1000" type="text" id="additionalIncomes" name="additionalIncomes" placeholder="0,00" value="1000" />          
         </div>
         </div>
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="period">Prazo</label>
-        <div class="flex w-full ">          
-          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md px-2" min="0" type="text" id="period" name="period" value="100" required/>
-          <select id="evaluatePeriod" class="bg-blue-400 w-2/6 rounded-r-md font-semibold hover:bg-blue-900 hover:text-white">
-            <option value="monthly">meses</option>
+        <div class="flex w-full shadow-xl/30 ">          
+          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="period" name="period" value="100" required/>
+          <select id="evaluatePeriod" class="text-center bg-blue-400 w-2/6 rounded-r-md font-semibold inset-shadow-sm inset-shadow-indigo-500 hover:bg-blue-900 hover:text-white">
+            <option  value="monthly">meses</option>
             <option value="yearly">anos</option>
           </select>
         </div>
@@ -40,10 +40,10 @@
         
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="interestRates">Rentabilidade</label>
-        <div class="flex w-full ">
-          <input class="h-10 bg-blue-300 w-3/6 rounded-l-md px-2" min="0" type="text" id="interestRates" name="interestRates" value="1" required/>
-          <input class="h-10 bg-blue-200 w-1/6 text-center" type="text" value="%" disabled/>          
-          <select id="ratePeriod" class="bg-blue-400 w-2/6 rounded-r-md font-semibold hover:bg-blue-900 hover:text-white">
+        <div class="flex w-full shadow-xl/30 ">
+          <input class="h-10 bg-blue-300 w-3/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="interestRates" name="interestRates" value="1" required/>
+          <input class="h-10 bg-blue-200 w-1/6 text-center inset-shadow-sm inset-shadow-indigo-500/50" type="text" value="%" disabled/>          
+          <select id="ratePeriod" class="text-center bg-blue-400 w-2/6 rounded-r-md font-semibold inset-shadow-sm inset-shadow-indigo-500 hover:bg-blue-900 hover:text-white">
             <option value="monthly">mensal</option>
             <option value="yearly">anual</option>
           </select>
@@ -52,23 +52,23 @@
 
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold text-white" for="fees">Impostos sobre lucro</label>
-        <div class="flex w-full">          
-          <input class="h-10 bg-blue-300 w-5/6 rounded-l-md px-2" min="0" type="text" id="fees" name="fees" value="15" required/>          
+        <div class="flex w-full shadow-xl/30">          
+          <input class="h-10 bg-blue-300 w-5/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500" min="0" type="text" id="fees" name="fees" value="15" required/>          
           
-          <input class="h-10 bg-blue-200 w-1/6 rounded-r-md text-center" type="text" value="%" disabled/>
+          <input class="h-10 bg-blue-200 w-1/6 rounded-r-md text-center inset-shadow-sm inset-shadow-indigo-500/50" type="text" value="%" disabled/>
         </div>
         </div>
       </form>
 
       <div class="flex w-full flex-col gap-1">
-        <button id="calculate_returns" form="formInvestment" class="text-white h-10 bg-blue-500 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium ">Calcular</button>
-        <button id="clearForm" class="text-white h-10 bg-blue-500 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium  ">Limpar</button>
+        <button id="calculate_returns" form="formInvestment" class="text-white h-10 bg-indigo-700 shadow-xl/30 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium ">Calcular</button>
+        <button id="clearForm" class="text-white h-10 bg-blue-500 shadow-xl/30 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium  ">Limpar</button>
       </div>                
     </div>
       </div>
 
     </aside>
-   <main id="main"  class="row-span-2 col-span-2 relative">
+   <main id="main"  class="row-span-2 col-span-2 relative hidden">
         <button id="slide-arrow-preview" class="absolute top-0 bottom-0 left-0 text-5xl cursor-pointer bg-slate-10 opacity-15 w-8 hover:opacity-100 ">&#8249;</button>
         <button id="slide-arrow-next" class="absolute top-0 bottom-0 right-0 text-5xl  cursor-pointer bg-slate-10 opacity-15 w-8 hover:opacity-100 focus:opacity-100"> &#8250;</button>
       <div id="carousel" class = "h-full w-full flex overflow-x-auto scroll-smooth-3">
