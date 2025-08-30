@@ -17,20 +17,20 @@
           <label class="font-semibold text-white" for="startingAmount">Investimento inicial</label>
         <div class="flex w-full ">
           <input class="h-10 bg-blue-200 w-1/6 rounded-l-md" type="text" value="R$" disabled/>
-          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 px-2" step="1000" min="0" type="text" id="startingAmount" name="startingAmount" placeholder="0,00" required />          
+  <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 px-2" step="1000" min="0" type="text" id="startingAmount" name="startingAmount" placeholder="0,00" value="1000" required/>          
         </div>
         </div>
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="additionalIncomes">Aportes adicionais</label>
         <div class="flex w-full">
           <input class="h-10 bg-blue-200 w-1/6 rounded-l-md" type="text" value="R$" disabled/>
-          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md px-2" min="0" step="1000" type="text" id="additionalIncomes" name="additionalIncomes" placeholder="0,00"/>          
+          <input class="h-10 bg-blue-300 w-5/6 rounded-r-md px-2" min="0" step="1000" type="text" id="additionalIncomes" name="additionalIncomes" placeholder="0,00" value="1000" />          
         </div>
         </div>
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="period">Prazo</label>
         <div class="flex w-full ">          
-          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md px-2" min="0" type="text" id="period" name="period" required/>
+          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md px-2" min="0" type="text" id="period" name="period" value="100" required/>
           <select id="evaluatePeriod" class="bg-blue-400 w-2/6 rounded-r-md font-semibold hover:bg-blue-900 hover:text-white">
             <option value="monthly">meses</option>
             <option value="yearly">anos</option>
@@ -41,7 +41,7 @@
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="interestRates">Rentabilidade</label>
         <div class="flex w-full ">
-          <input class="h-10 bg-blue-300 w-3/6 rounded-l-md px-2" min="0" type="text" id="interestRates" name="interestRates" required/>
+          <input class="h-10 bg-blue-300 w-3/6 rounded-l-md px-2" min="0" type="text" id="interestRates" name="interestRates" value="1" required/>
           <input class="h-10 bg-blue-200 w-1/6 text-center" type="text" value="%" disabled/>          
           <select id="ratePeriod" class="bg-blue-400 w-2/6 rounded-r-md font-semibold hover:bg-blue-900 hover:text-white">
             <option value="monthly">mensal</option>
@@ -53,7 +53,7 @@
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold text-white" for="fees">Impostos sobre lucro</label>
         <div class="flex w-full">          
-          <input class="h-10 bg-blue-300 w-5/6 rounded-l-md px-2" min="0" type="text" id="fees" name="fees" required/>          
+          <input class="h-10 bg-blue-300 w-5/6 rounded-l-md px-2" min="0" type="text" id="fees" name="fees" value="15" required/>          
           
           <input class="h-10 bg-blue-200 w-1/6 rounded-r-md text-center" type="text" value="%" disabled/>
         </div>
