@@ -29,7 +29,7 @@ function renderProgression(e) {
         return;
     }
     resetCharts();
-    
+    carouselElement.scrollLeft-=mainElement.clientWidth
     const startingAmount=Number(document.getElementById("startingAmount").value.replace(",","."));
     const additionalIncomes=Number(document.getElementById("additionalIncomes").value.replace(",","."));    
     const period=Number(document.getElementById("period").value);  
@@ -98,9 +98,12 @@ progressionChart =new Chart(growthAmountChart, {
             }
         }
     }
-});
+})
+;
 createTable(columnsArray, returnsArray,'results-table');
-
+mainElement.classList.remove("hidden");
+btnNext.classList.remove("hidden");
+btnPreview.classList.add("hidden");
 }
 
 function isObjectEmpty(obj) {
@@ -123,6 +126,7 @@ function clearForm() {
         
     resetCharts();
     cleanTables();
+    mainElement.classList.add("hidden");
 
     const errorInputs=document.querySelectorAll('.error');//criar uma lista com erros
 
@@ -166,11 +170,17 @@ const btnPreview=document.getElementById("slide-arrow-preview");
 const btnNext=document.getElementById("slide-arrow-next");
 
 
-    btnNext.addEventListener("click",()=>
-        carouselElement.scrollLeft+=mainElement.clientWidth);
+    btnNext.addEventListener("click",()=>{
+        carouselElement.scrollLeft+=mainElement.clientWidth
+        btnPreview.classList.remove("hidden");
+        btnNext.classList.add("hidden");
+    });
 
-    btnPreview.addEventListener("click",()=>
-        carouselElement.scrollLeft-=mainElement.clientWidth);
+    btnPreview.addEventListener("click",()=>{
+        carouselElement.scrollLeft-=mainElement.clientWidth
+        btnNext.classList.remove("hidden");
+        btnPreview.classList.add("hidden");
+        });
 
 
 
