@@ -30,7 +30,7 @@
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="period">Prazo</label>
         <div class="flex w-full shadow-xl/30 ">          
-          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="period" name="period" value="100" required/>
+          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="period" name="period" value="10" required/>
           <select id="evaluatePeriod" class="text-center bg-blue-400 w-2/6 rounded-r-md font-semibold inset-shadow-sm inset-shadow-indigo-500 hover:bg-blue-900 hover:text-white">
             <option  value="monthly">meses</option>
             <option value="yearly">anos</option>
@@ -73,7 +73,7 @@
         <button id="slide-arrow-next" class="absolute top-0 bottom-0 right-0 text-5xl  cursor-pointer bg-slate-10 opacity-15 w-8 hover:opacity-100 focus:opacity-100"> &#8250;</button>
       <div id="carousel" class = "h-full w-full flex overflow-x-auto scroll-smooth-3">
         <section id="charts-container" class=" basis-full shrink-0 full h-full place-content-between gap-2">          
-            <div class="h-[36%] flex flex-col items-center pb-10 mb-5" >
+            <div class="h-[36%] flex flex-col items-center pb-1 mb-1" >
               <p class="text-2xl font-semibold text-blue-700 pt-5">Resultado</p>
               <canvas id="shareAmountChart" class="w-full h-full m-1"></canvas>
             </div>

@@ -7,6 +7,11 @@ const form=document.getElementById("formInvestment");
 const btnClear=document.getElementById("clearForm");
 const shareAmountChart=document.getElementById("shareAmountChart");
 const growthAmountChart=document.getElementById("growthAmountChart");
+const mainElement=document.getElementById("main");
+const carouselElement=document.getElementById("carousel");
+const btnPreview=document.getElementById("slide-arrow-preview");
+const btnNext=document.getElementById("slide-arrow-next");
+
 let doughnutChart={};
 let progressionChart={};
 
@@ -29,7 +34,8 @@ function renderProgression(e) {
         return;
     }
     resetCharts();
-    carouselElement.scrollLeft-=mainElement.clientWidth
+
+    carouselElement.scrollLeft-=mainElement.clientWidth;
     const startingAmount=Number(document.getElementById("startingAmount").value.replace(",","."));
     const additionalIncomes=Number(document.getElementById("additionalIncomes").value.replace(",","."));    
     const period=Number(document.getElementById("period").value);  
@@ -43,29 +49,74 @@ function renderProgression(e) {
     const returnAmount=currencyApply(finalInvestmentObject.totalInterestReturns*(1-fees/100));
     const fee=currencyApply(finalInvestmentObject.totalInterestReturns*(fees/100));
    
+//--------------------------------------------------------------------------------------------------
+// Selecionar os contextos dos dois gráficos
+const ctxDoughnut = shareAmountChart.getContext("2d");
+const ctxBar = growthAmountChart.getContext("2d");
 
- doughnutChart=   new Chart(
-        shareAmountChart,
-        {
-        type: 'doughnut',
-        data: {labels: ["Investido","Retorno","Imposto"],
-            datasets: [{
-            // label: 'My First Dataset',
-            data: [investedAmount,returnAmount,fee],
-            backgroundColor: ['blue','green',"red" ],            
-            hoverOffset: 10,
-            borderWidth: 0}]
-            },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // 🔥 permite ao gráfico usar toda a div
-            layout: {
-                padding: 20 // 🔥 adiciona espaço extra para não cortar
+// Função para criar gradientes lineares mais escuros e visíveis
+function createGradient(ctx, colorStart, colorMiddle, colorEnd) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+    gradient.addColorStop(0., colorStart);
+    gradient.addColorStop(.45, colorMiddle); 
+    gradient.addColorStop(0.95, colorEnd);
+    return gradient;
+}
+
+// 🔹 Gradientes mais escuros e perceptíveis  
+const gradientInvested = createGradient(ctxDoughnut,  "#28017a", "#5d8ef0","#28017a"); // Azul forte
+const gradientReturn   = createGradient(ctxDoughnut, "#05f71d", "#043813", "#05f71d"); // Verde escuro
+const gradientFee      = createGradient(ctxDoughnut, "#e34222", "#540a26", "#e34222"); // Vermelho intenso
+
+// ------------------------ DOUGHNUT CHART ------------------------
+doughnutChart = new Chart(shareAmountChart, {
+    type: 'doughnut',
+    data: {
+        labels: ["Investido", "Retorno", "Imposto"],
+        datasets: [{
+            data: [investedAmount, returnAmount, fee],
+            backgroundColor: [gradientInvested, gradientReturn, gradientFee],
+            hoverOffset: 20,
+            borderWidth: 0,
+            borderColor: "#fff" // 🔹 Contraste visual melhorado
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: 20 },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'circle',
+                    padding: 15,
+                    font: { size: 14 },
+                    generateLabels: function(chart) {
+                        const data = chart.data;
+                        return data.labels.map((label, i) => {
+                            const value = data.datasets[0].data[i];
+                            return {
+                                text: `${label}: R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+                                fillStyle: data.datasets[0].backgroundColor[i],
+                                strokeStyle: data.datasets[0].backgroundColor[i],
+                                pointStyle: 'circle',
+                                hidden: false
+                            };
+                        });
+                    }
+                }
             }
-}            
-        })
+        }
+    }
+});
 
-progressionChart =new Chart(growthAmountChart, {
+// ------------------------ PROGRESSION CHART ------------------------
+const gradientInvestedBar = createGradient(ctxBar,  "#28017a","#5d8ef0", "#28017a"); // Azul forte
+const gradientReturnBar   = createGradient(ctxBar, "#05f71d","#043813", "#05f71d"); // Verde escuro
+
+progressionChart = new Chart(growthAmountChart, {
     type: 'bar',
     data: {
         labels: returnsArray.map(a => a.month),
@@ -73,21 +124,19 @@ progressionChart =new Chart(growthAmountChart, {
             {
                 label: "Total investido",
                 data: returnsArray.map(a => currencyApply(a.investedAmount)),
-                backgroundColor: 'blue'
+                backgroundColor: gradientInvestedBar
             },
             {
                 label: "Retorno do Investimento",
-                data:  returnsArray.map(a => currencyApply(a.totalAmount)),
-                backgroundColor: 'green'
-            },
+                data: returnsArray.map(a => currencyApply(a.totalAmount)),
+                backgroundColor: gradientReturnBar
+            }
         ]
     },
     options: {
         responsive: true,
         scales: {
-            x: {
-                stacked: true
-            },
+            x: { stacked: true },
             y: {
                 beginAtZero: true,
                 ticks: {
@@ -98,8 +147,9 @@ progressionChart =new Chart(growthAmountChart, {
             }
         }
     }
-})
-;
+});
+
+//----------------------------------------------------------------------------------------------------
 createTable(columnsArray, returnsArray,'results-table');
 mainElement.classList.remove("hidden");
 btnNext.classList.remove("hidden");
@@ -126,6 +176,7 @@ function clearForm() {
         
     resetCharts();
     cleanTables();
+    
     mainElement.classList.add("hidden");
 
     const errorInputs=document.querySelectorAll('.error');//criar uma lista com erros
@@ -164,10 +215,7 @@ for(const formElement of form){
         formElement.addEventListener("blur",validateInput);                
     }
 }
-const mainElement=document.getElementById("main");
-const carouselElement=document.getElementById("carousel");
-const btnPreview=document.getElementById("slide-arrow-preview");
-const btnNext=document.getElementById("slide-arrow-next");
+
 
 
     btnNext.addEventListener("click",()=>{
@@ -181,8 +229,6 @@ const btnNext=document.getElementById("slide-arrow-next");
         btnNext.classList.remove("hidden");
         btnPreview.classList.add("hidden");
         });
-
-
 
 btnClear.addEventListener("click",clearForm);
 form.addEventListener("submit",renderProgression);
