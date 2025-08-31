@@ -53,7 +53,12 @@
         <div class="flex flex-col px-3 mt-2">
           <label class="font-semibold text-white" for="fees">Impostos sobre lucro</label>
         <div class="flex w-full shadow-xl/30">          
-          <input class="h-10 bg-blue-300 w-5/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500" min="0" type="text" id="fees" name="fees" value="15" required/>          
+            <select id="fees" required class="text-center bg-blue-400 w-5/6 rounded-l-md font-semibold inset-shadow-sm inset-shadow-indigo-500 hover:bg-blue-900 hover:text-white" >
+              <option value="22.5">22,5</option>
+              <option value="20">20</option>
+              <option value="17.5">17,5</option>
+              <option value="15">15</option>
+            </select>          
           
           <input class="h-10 bg-blue-200 w-1/6 rounded-r-md text-center inset-shadow-sm inset-shadow-indigo-500/50" type="text" value="%" disabled/>
         </div>

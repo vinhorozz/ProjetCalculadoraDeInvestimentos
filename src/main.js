@@ -176,7 +176,8 @@ function clearForm() {
         
     resetCharts();
     cleanTables();
-    
+    carouselElement.scrollTop-=mainElement.clientWidth
+    carouselElement.scrollLeft-=mainElement.clientWidth
     mainElement.classList.add("hidden");
 
     const errorInputs=document.querySelectorAll('.error');//criar uma lista com erros
