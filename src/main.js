@@ -24,7 +24,12 @@ const columnsArray=[
 ]
 
 function currencyApply(value,currency=false){    
-   return !currency ? value.toFixed(2):value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})
+    if(!currency){
+        return value.toFixed(2)
+    }else{
+    let [integer,decimal]=String(value).split(".");
+        return `${integer.replace(/\B(?=(\d{3})+(?!\d))/g, ".")},${decimal}`
+    }
 }
 
 function renderProgression(e) {
@@ -98,7 +103,7 @@ doughnutChart = new Chart(shareAmountChart, {
                         return data.labels.map((label, i) => {
                             const value = data.datasets[0].data[i];
                             return {
-                                text: `${label}: R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+                                text: `${label}: R$ ${currencyApply(value,true)}`,
                                 fillStyle: data.datasets[0].backgroundColor[i],
                                 strokeStyle: data.datasets[0].backgroundColor[i],
                                 pointStyle: 'circle',
