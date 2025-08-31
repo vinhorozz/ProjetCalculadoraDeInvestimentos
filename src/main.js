@@ -17,19 +17,21 @@ let progressionChart={};
 
 const columnsArray=[
     {columnLabel: "Mês", accessor: "month"},
-    {columnLabel: "Total Investido", accessor: "investedAmount",format:(a)=>currencyApply(a,true)},
-    {columnLabel: "Rendimento Mensal", accessor: "interestReturns",format:(a)=>currencyApply(a,true)},
-    {columnLabel: "Rendimento Total", accessor: "totalInterestReturns",format:(a)=>currencyApply(a,true)},
-    {columnLabel: "Quantia Total", accessor: "totalAmount",format:(a)=>currencyApply(a,true)}    
+    {columnLabel: "Total Investido", accessor: "investedAmount",format:(a)=>currencyApplyTable(a)},
+    {columnLabel: "Rendimento Mensal", accessor: "interestReturns",format:(a)=>currencyApplyTable(a)},
+    {columnLabel: "Rendimento Total", accessor: "totalInterestReturns",format:(a)=>currencyApplyTable(a)},
+    {columnLabel: "Quantia Total", accessor: "totalAmount",format:(a)=>currencyApplyTable(a)}    
 ]
 
-function currencyApply(value,currency=false){    
-    if(!currency){
-        return value.toFixed(2)
-    }else{
-    let [integer,decimal]=String(value).split(".");
-        return `${integer.replace(/\B(?=(\d{3})+(?!\d))/g, ".")},${decimal}`
-    }
+function currencyApplyTable(value,table=false) {
+  return value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})    
+}
+
+function currencyApplyMix(value,chart=false){   
+    return !chart? value.toFixed(2):(()=>{
+        let [integer,decimal]=value.split(".")
+        return  (`${integer.replace(/\B(?=(\d{3})+(?!\d))/g, ".")},${decimal}`)         
+    })()
 }
 
 function renderProgression(e) {
@@ -50,9 +52,9 @@ function renderProgression(e) {
     const fees=Number(document.getElementById("fees").value.replace(",","."));
     const returnsArray= generateReturnsArray(startingAmount,additionalIncomes,period,evaluatePeriod,interestRates,ratePeriod,fees);
     const finalInvestmentObject=(returnsArray[returnsArray.length -1]);
-    const investedAmount=currencyApply(finalInvestmentObject.investedAmount);
-    const returnAmount=currencyApply(finalInvestmentObject.totalInterestReturns*(1-fees/100));
-    const fee=currencyApply(finalInvestmentObject.totalInterestReturns*(fees/100));
+    const investedAmount=currencyApplyMix(finalInvestmentObject.investedAmount);
+    const returnAmount=currencyApplyMix(finalInvestmentObject.totalInterestReturns*(1-fees/100));
+    const fee=currencyApplyMix(finalInvestmentObject.totalInterestReturns*(fees/100));
    
 //--------------------------------------------------------------------------------------------------
 // Selecionar os contextos dos dois gráficos
@@ -99,19 +101,21 @@ doughnutChart = new Chart(shareAmountChart, {
                     padding: 15,
                     font: { size: 14 },
                     generateLabels: function(chart) {
-                        const data = chart.data;
+                        const data = chart.data;                       
                         return data.labels.map((label, i) => {
                             const value = data.datasets[0].data[i];
                             return {
-                                text: `${label}: R$ ${currencyApply(value,true)}`,
+                                text: `${label}: R$ ${currencyApplyMix(value,true)}`,
                                 fillStyle: data.datasets[0].backgroundColor[i],
                                 strokeStyle: data.datasets[0].backgroundColor[i],
                                 pointStyle: 'circle',
                                 hidden: false
                             };
+                            
                         });
                     }
-                }
+                },
+               
             }
         }
     }
@@ -128,12 +132,12 @@ progressionChart = new Chart(growthAmountChart, {
         datasets: [
             {
                 label: "Total investido",
-                data: returnsArray.map(a => currencyApply(a.investedAmount)),
+                data: returnsArray.map(a => currencyApplyMix((a.investedAmount))),
                 backgroundColor: gradientInvestedBar
             },
             {
                 label: "Retorno do Investimento",
-                data: returnsArray.map(a => currencyApply(a.totalAmount)),
+                data: returnsArray.map(a => currencyApplyMix(a.totalAmount)),
                 backgroundColor: gradientReturnBar
             }
         ]
@@ -146,7 +150,7 @@ progressionChart = new Chart(growthAmountChart, {
                 beginAtZero: true,
                 ticks: {
                     callback: function(value) {
-                        return 'R$ ' + value.toLocaleString('pt-BR');
+                        return 'R$ ' +(value).toLocaleString('pt-BR');
                     }
                 }
             }
@@ -221,8 +225,6 @@ for(const formElement of form){
         formElement.addEventListener("blur",validateInput);                
     }
 }
-
-
 
     btnNext.addEventListener("click",()=>{
         carouselElement.scrollLeft+=mainElement.clientWidth

@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="src/style.css">
     <title>Calculadora de Investimentos</title>
   </head>
-  <body class="bg-blue-100 grid grid-cols-3 grid-rows-2 h-[100dvh]">
+  <body class="bg-blue-100 grid grid-cols-3 grid-rows-2 h-[100dvh] ">
 
     <aside class="bg-linear-to-tr from-blue-500 to-indigo-600  row-span-2 flex flex-col justify-between py-2 px-2 shadow-xl/100">
-      <h1 class="text-4xl text-white autofill:max-w-full text-shadow-lg  m-5 p-2">Calculadora de Investimentos</h1>        
+       <h1 class="text-4xl text-white autofill:max-w-full text-shadow-lg  m-5 p-2">Calculadora de Investimentos</h1>        
 
       <form id="formInvestment" class="w-full">
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="startingAmount">Investimento inicial</label>
         <div class="flex w-full shadow-xl/30 ">
           <input class="h-10 bg-blue-200 w-1/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500/50 " type="text" value="R$" disabled/>
-  <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 text-center inset-shadow-sm inset-shadow-indigo-500 " step="1000" min="0" type="text" id="startingAmount" name="startingAmount" placeholder="0,00" required/>          
+  <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 text-center inset-shadow-sm inset-shadow-indigo-500 " step="1000" min="0" type="text" id="startingAmount" name="startingAmount" placeholder="0,00" required />          
         </div>
         </div>
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
@@ -30,7 +30,7 @@
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="period">Prazo</label>
         <div class="flex w-full shadow-xl/30 ">          
-          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="period" name="period" placeholder="0" required/>
+          <input class="h-10 bg-blue-300 w-4/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="period" name="period" placeholder="0" required />
           <select id="evaluatePeriod" class="text-center bg-blue-400 w-2/6 rounded-r-md font-semibold inset-shadow-sm inset-shadow-indigo-500 hover:bg-blue-900 hover:text-white">
             <option  value="monthly">meses</option>
             <option value="yearly">anos</option>
@@ -86,7 +86,7 @@
 
             <div class="h-[56%] flex flex-col items-center pb-10 mb-5">
               <p class="text-2xl font-semibold text-blue-700 pt-5">Progressão</p>
-              <canvas id="growthAmountChart" class="w-full m-1"></canvas>
+              <canvas id="growthAmountChart" class="w-full m-2 sm:m-4 md:m-6 lg:m-8 xl:m-5"></canvas>
             </div>
         </section>
 
