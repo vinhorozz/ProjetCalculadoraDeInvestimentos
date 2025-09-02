@@ -2,8 +2,9 @@ import { Chart} from "chart.js/auto";
 import { generateReturnsArray } from "./investmentGoals.js";
 import { createTable } from "./table.js";
 import{cleanTables}from"./table.js";
+import { fillInthenBlanks } from "./testMode.js";
 
-
+const toggleSwitch=document.getElementById("toggleSwitch");
 const form=document.getElementById("formInvestment");
 const btnClear=document.getElementById("clearForm");
 const shareAmountChart=document.getElementById("shareAmountChart");
@@ -241,3 +242,4 @@ for(const formElement of form){
 
 btnClear.addEventListener("click",clearForm);
 form.addEventListener("submit",renderProgression);
+toggleSwitch.addEventListener("change",fillInthenBlanks);
