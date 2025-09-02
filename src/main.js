@@ -3,6 +3,7 @@ import { generateReturnsArray } from "./investmentGoals.js";
 import { createTable } from "./table.js";
 import{cleanTables}from"./table.js";
 
+
 const form=document.getElementById("formInvestment");
 const btnClear=document.getElementById("clearForm");
 const shareAmountChart=document.getElementById("shareAmountChart");

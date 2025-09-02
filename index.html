@@ -10,7 +10,14 @@
   <body class="bg-blue-100 grid grid-cols-3 grid-rows-2 h-[100dvh] ">
 
     <aside class="bg-linear-to-tr from-blue-500 to-indigo-600  row-span-2 flex flex-col justify-between py-2 px-2 shadow-xl/100">
-       <h1 class="text-4xl text-white autofill:max-w-full text-shadow-lg  m-5 p-2">Calculadora de Investimentos</h1>        
+       <h1 class="text-4xl text-white autofill:max-w-full text-shadow-lg  m-5 p-2">Calculadora de Investimentos</h1>   
+      
+      <div class="switch-container">
+        <label for="toggleSwitch" class="bg-blue-300 cursor-pointer relative rounded-full w-20 h-15 ml-3 px-5">
+          <input type="checkbox" id="toggleSwitch" class="sr-only peer" >
+          <span class="w-2/6 h-4/6 bg-blue-700 absolute rounded-full left-1 top-1 peer-checked:bg-indigo-700 peer-checked:left-5 transition-all duration-500"></span>
+        </label>
+      </div>
 
       <form id="formInvestment" class="w-full">
         <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
@@ -100,6 +107,7 @@
       </div>
         
     </main>
+     <script type="module" src="./src/testMode.js"></script>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
