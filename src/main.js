@@ -1,7 +1,7 @@
-import { Chart} from "chart.js/auto";
+
 import { generateReturnsArray } from "./investmentGoals.js";
 import { createTable } from "./table.js";
-import{cleanTables}from"./table.js";
+import {cleanTables}from"./table.js";
 import { fillInthenBlanks } from "./testMode.js";
 import { createDoughnutChart, createProgressionChart } from "./chartCreator.js";
 
@@ -23,7 +23,7 @@ const columnsArray=[
     {columnLabel: "Total Investido", accessor: "investedAmount",format:(a)=>currencyApplyTable(a)},
     {columnLabel: "Rendimento Mensal", accessor: "interestReturns",format:(a)=>currencyApplyTable(a)},
     {columnLabel: "Rendimento Total", accessor: "totalInterestReturns",format:(a)=>currencyApplyTable(a)},
-    {columnLabel: "Quantia Total", accessor: "totalAmount",format:(a)=>currencyApplyTable(a)}    
+    {columnLabel: "Total Bruto", accessor: "totalAmount",format:(a)=>currencyApplyTable(a)}    
 ]
 
 function currencyApplyTable(value,table=false) {
@@ -60,8 +60,10 @@ function renderProgression(e) {
     const fee=currencyApplyMix(finalInvestmentObject.totalInterestReturns*(fees/100));
     const ctxDoughnut = shareAmountChart.getContext("2d");
     const ctxBar = growthAmountChart.getContext("2d");
+    const netValue=String((Number(investedAmount)+Number(returnAmount)).toFixed(2));
+    const grossValue =String((Number(investedAmount) +finalInvestmentObject.totalInterestReturns).toFixed(2));
 
-    doughnutChart = createDoughnutChart(ctxDoughnut, investedAmount, returnAmount, fee, currencyApplyMix);
+    doughnutChart = createDoughnutChart(ctxDoughnut, investedAmount, returnAmount, fee,netValue, grossValue, currencyApplyMix);
     progressionChart = createProgressionChart(ctxBar, returnsArray, currencyApplyMix);
 
     createTable(columnsArray, returnsArray,'results-table');
@@ -126,7 +128,7 @@ function validateInput(e) {
 }
 
 for(const formElement of form){
-    if(formElement.tagName==='INPUT' && formElement.hasAttribute('name')){
+    if(formElement.tagName==='INPUT' && formElement.hasAttribute('name')&& formElement.hasAttribute('required')){
         formElement.addEventListener("blur",validateInput);                
     }
 }
