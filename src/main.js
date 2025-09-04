@@ -153,19 +153,26 @@ form.addEventListener("submit",renderProgression);
 toggleSwitch.addEventListener("change",fillInthenBlanks);
 
 let resizeTimeOut;
+let lastHeight=window.innerHeight;
 
 window.addEventListener("resize",()=>{
     if(!mainElement.classList.contains("hidden")){
     clearTimeout(resizeTimeOut);
-    setTimeout(()=>{renderProgression(new Event("submit")),3000})
-    }
 
-
+    resizeTimeOut=setTimeout(()=>{
+        if(window.innerHeight!==lastHeight){
+            renderProgression(new Event("submit"));
+        }
+        lastHeight=window.innerHeight;
+    },100);
+    
+}
     const infoBlocks= form.querySelectorAll('div[name="infoBlock"]');
     infoBlocks.forEach(info => {
-        if(window.innerHeight<600){
-        info.classList.remove("h-[5.5rem]")
-        const inputs=info.querySelectorAll('input');
+        
+        if(window.innerHeight<600){      
+            info.classList.remove("h-[5.5rem]")    
+            const inputs=info.querySelectorAll('input');
             for (const input of inputs) {
                 input.classList.remove('h-10');
                 input.classList.add('h-6');
@@ -188,10 +195,33 @@ window.addEventListener("resize",()=>{
                btnCalculate.classList.remove("h-10")
                btnCalculate.classList.add("h-6", "mt-4")
                btnClear.classList.remove("h-10")
-               btnClear.classList.add("h-6", )
-    }else{
+               btnClear.classList.add("h-6")
+    }else{   
+            info.classList.add("h-[5.5rem]")    
+            const inputs=info.querySelectorAll('input');
+            for (const input of inputs) {
+                input.classList.remove('h-6');
+                input.classList.add('h-10');
+                input.style.fontSize="16px";
 
-    }
+            const labels=info.querySelector('label')
+                    labels.style.fontSize='16px';
+            
+            const selectors=form.querySelectorAll("select");
+                for(const select of selectors){
+                        select.style.fontSize="16px"
+                }
+            
+            const options=info.querySelectorAll('option');               
+                for(const opt of options){
+                opt.style.fontSize="16px";}
+            }
+               btnClear.style.fontSize="16px";
+               btnCalculate.style.fontSize="16px";               
+               btnCalculate.classList.remove("h-6")
+               btnCalculate.classList.add("h-10")
+               btnClear.classList.remove("h-6")
+               btnClear.classList.add("h-10")}
 });
 
 })
