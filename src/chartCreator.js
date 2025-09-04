@@ -30,16 +30,22 @@ export function createDoughnutChart(ctx, investedAmount, returnAmount, fee,netVa
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            layout: { padding: 20},
+            layout: { padding: {
+                    left: 0,
+                    right:window.innerWidth/10,
+                    top:window.innerHeight/200,
+                    bottom:window.innerHeight/200*20}},
             plugins: {
                 legend: {
                     position: "left",
                     labels: {
                         usePointStyle: true,
-                        pointStyle: "circle",
-                        // paddingRight: innerWidth>1300?innerWidth/130:innerWidth>900?innerWidth/100:innerWidth>600?innerWidth/100:innerWidth/100,
-                        paddingLeft: innerWidth>1300?innerWidth/130:innerWidth>900?innerWidth/100:innerWidth>600?innerWidth/100:innerWidth/100,                            
-                        font: { size: innerHeight>800?innerHeight/60:innerHeight>640?innerHeight/60:innerHeight>440?innerHeight/60:innerHeight/80},
+                        pointStyle: "circle",             
+                         padding:innerWidth>1300?innerWidth/130:innerWidth>900?innerWidth/100:innerWidth>600?innerWidth/100:innerWidth/100,
+
+                         font: { size: innerHeight>800?innerHeight/80:innerHeight>640?innerHeight/60:innerHeight>440?innerHeight/60:innerHeight/80},
+
+
                         generateLabels: function (chart) {
                             const data = chart.data;                                                        
                             const labels = data.labels.map((label, i) => {
@@ -57,10 +63,6 @@ export function createDoughnutChart(ctx, investedAmount, returnAmount, fee,netVa
                                 fillStyle: "#5d8ef0", // Sem cor na bolinha
                                 strokeStyle: "#5d8ef0",
                                 pointStyle: "",
-                                
-                              
-                            
-                                
 
                             }); labels.push({
                                 text: `Total Bruto: R$ ${currencyApplyMix(grossValue, true)}`,                                

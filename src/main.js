@@ -5,8 +5,11 @@ import {cleanTables}from"./table.js";
 import { fillInthenBlanks } from "./testMode.js";
 import { createDoughnutChart, createProgressionChart } from "./chartCreator.js";
 
+
 const toggleSwitch=document.getElementById("toggleSwitch");
+const aside=document.getElementsByTagName('aside');
 const form=document.getElementById("formInvestment");
+const btnCalculate=document.getElementById("calculate_returns")
 const btnClear=document.getElementById("clearForm");
 const shareAmountChart=document.getElementById("shareAmountChart");
 const growthAmountChart=document.getElementById("growthAmountChart");
@@ -148,3 +151,48 @@ btnPreview.addEventListener("click",()=>{
 btnClear.addEventListener("click",clearForm);
 form.addEventListener("submit",renderProgression);
 toggleSwitch.addEventListener("change",fillInthenBlanks);
+
+let resizeTimeOut;
+
+window.addEventListener("resize",()=>{
+    if(!mainElement.classList.contains("hidden")){
+    clearTimeout(resizeTimeOut);
+    setTimeout(()=>{renderProgression(new Event("submit")),3000})
+    }
+
+
+    const infoBlocks= form.querySelectorAll('div[name="infoBlock"]');
+    infoBlocks.forEach(info => {
+        if(window.innerHeight<600){
+        info.classList.remove("h-[5.5rem]")
+        const inputs=info.querySelectorAll('input');
+            for (const input of inputs) {
+                input.classList.remove('h-10');
+                input.classList.add('h-6');
+                input.style.fontSize="10px";
+
+            const labels=info.querySelector('label')
+                    labels.style.fontSize='10px';
+            
+            const selectors=form.querySelectorAll("select");
+                for(const select of selectors){
+                        select.style.fontSize="10px"
+                }
+            
+            const options=info.querySelectorAll('option');               
+                for(const opt of options){
+                opt.style.fontSize="10px";}
+            }
+               btnClear.style.fontSize="10px";
+               btnCalculate.style.fontSize="10px";               
+               btnCalculate.classList.remove("h-10")
+               btnCalculate.classList.add("h-6", "mt-4")
+               btnClear.classList.remove("h-10")
+               btnClear.classList.add("h-6", )
+    }else{
+    
+    }
+});
+
+})
+

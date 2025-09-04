@@ -10,26 +10,26 @@
   <body class="bg-blue-100 grid grid-cols-3 grid-rows-2 h-[100dvh] ">
 
     <aside class="bg-linear-to-tr from-blue-500 to-indigo-600  row-span-2 flex flex-col justify-between py-2 px-2 shadow-xl/100">
-       <h1 class="text-4xl text-white autofill:max-w-full text-shadow-lg  m-5 p-2">Calculadora de Investimentos</h1>   
+       <h1 class="xl:text-3xl font-bold text-white text-shadow-lg mx-auto pt-3 px-auto">Calculadora de Investimentos</h1>   
       
 
 
       <form id="formInvestment" class="w-full">
-        <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
+        <div name="infoBlock" class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="startingAmount">Investimento inicial</label>
         <div class="flex w-full shadow-xl/30 ">
           <input class="h-10 bg-blue-200 w-1/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500/50 " type="text" value="R$" disabled/>
   <input class="h-10 bg-blue-300 w-5/6 rounded-r-md start-0 text-center inset-shadow-sm inset-shadow-indigo-500 " step="1000" min="0" type="text" id="startingAmount" name="startingAmount" placeholder="0,00" required />          
         </div>
         </div>
-        <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
+        <div name="infoBlock" class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="additionalIncomes">Aportes adicionais</label>
         <div class="flex w-full shadow-xl/30">
           <input class="h-10 bg-blue-200 w-1/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500/50" type="text" value="R$" disabled/>
           <input class="h-10 bg-blue-300 w-5/6 rounded-r-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" step="1000" type="text" id="additionalIncomes" name="additionalIncomes" placeholder="0,00" />          
         </div>
         </div>
-        <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
+        <div name="infoBlock" class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="period">Prazo</label>
         <div class="flex w-full shadow-xl/30 ">          
           <input class="h-10 bg-blue-300 w-4/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="period" name="period" placeholder="0" required />
@@ -40,7 +40,7 @@
         </div>
         </div>
         
-        <div class="flex flex-col px-3 mt-2 h-[5.5rem]">
+        <div name="infoBlock" class="flex flex-col px-3 mt-2 h-[5.5rem]">
           <label class="font-semibold text-white" for="interestRates">Rentabilidade</label>
         <div class="flex w-full shadow-xl/30 ">
           <input class="h-10 bg-blue-300 w-3/6 rounded-l-md text-center inset-shadow-sm inset-shadow-indigo-500 " min="0" type="text" id="interestRates" name="interestRates" placeholder="0,00"  required />
@@ -52,7 +52,7 @@
         </div>
         </div>
 
-        <div class="flex flex-col px-3 mt-2">
+        <div name="infoBlock" class="flex flex-col px-3 mt-2">
           <label class="font-semibold text-white" for="fees">Impostos sobre lucro</label>
         <div class="flex w-full shadow-xl/30">          
             <select id="fees" required class="text-center bg-blue-400 w-5/6 rounded-l-md font-normal inset-shadow-sm inset-shadow-indigo-500 hover:bg-blue-900 hover:text-white" >
@@ -67,15 +67,15 @@
         </div>
         </div>
       </form>
-            <div class="switch-container">
+            <div class="switch-container hidden">
         <label for="toggleSwitch" class="bg-blue-300 cursor-pointer relative rounded-full w-20 h-15 ml-3 px-5">
           <input type="checkbox" id="toggleSwitch" class="sr-only peer">
           <span class="w-2/6 h-4/6 bg-blue-700 absolute rounded-full left-1 top-1 peer-checked:bg-indigo-700 peer-checked:left-5 transition-all duration-500"></span>
         </label>
       </div>
       <div class="flex w-full flex-col gap-1">
-        <button id="calculate_returns" form="formInvestment" class="text-white h-10 bg-indigo-700 shadow-xl/30 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium ">Calcular</button>
-        <button id="clearForm" class="text-white h-10 bg-blue-500 shadow-xl/30 mb-3 mx-5 px-2 rounded-sm hover:bg-blue-900 font-medium  ">Limpar</button>
+        <button id="calculate_returns" form="formInvestment" class="text-white h-10 bg-indigo-700 shadow-xl/30 mb-3 mx-3 px-2 rounded-sm hover:bg-blue-900 font-medium ">Calcular</button>
+        <button id="clearForm" class="text-white h-10 bg-blue-500 shadow-xl/30 mb-3 mx-3 px-2 rounded-sm hover:bg-blue-900 font-medium  ">Limpar</button>
       </div>                
     </div>
       </div>
@@ -88,18 +88,8 @@
         <section id="charts-container" class=" basis-full shrink-0 full h-full place-content-between gap-2">          
             <div class="h-[36%] flex flex-col items-center pb-1 mb-1" >
               <p class="text-2xl font-semibold text-blue-700 pt-5">Resultado</p>
-              <canvas id="shareAmountChart" class="w-full h-full m-1 
-              sm:ml-0
-              sm:mr-20
-              
-              md:ml-5
-              md:mr-30
-
-              lg:ml-100 
-              lg:mr-70 
-
-              xl:ml-20  
-              xl:mr-75"></canvas>
+              <canvas id="shareAmountChart" class="w-full h-full "></canvas> 
+            <!---->
             </div>
 
             <div class="h-[56%] flex flex-col items-center pb-10 mb-5">
