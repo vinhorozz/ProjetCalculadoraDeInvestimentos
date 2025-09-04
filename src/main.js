@@ -190,7 +190,7 @@ window.addEventListener("resize",()=>{
                btnClear.classList.remove("h-10")
                btnClear.classList.add("h-6", )
     }else{
-    
+
     }
 });
 

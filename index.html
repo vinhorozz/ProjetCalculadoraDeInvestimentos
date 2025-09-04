@@ -67,7 +67,7 @@
         </div>
         </div>
       </form>
-            <div class="switch-container hidden">
+            <div class="switch-container ">
         <label for="toggleSwitch" class="bg-blue-300 cursor-pointer relative rounded-full w-20 h-15 ml-3 px-5">
           <input type="checkbox" id="toggleSwitch" class="sr-only peer">
           <span class="w-2/6 h-4/6 bg-blue-700 absolute rounded-full left-1 top-1 peer-checked:bg-indigo-700 peer-checked:left-5 transition-all duration-500"></span>
@@ -87,13 +87,13 @@
       <div id="carousel" class = "h-full w-full flex overflow-x-auto scroll-smooth">
         <section id="charts-container" class=" basis-full shrink-0 full h-full place-content-between gap-2">          
             <div class="h-[36%] flex flex-col items-center pb-1 mb-1" >
-              <p class="text-2xl font-semibold text-blue-700 pt-5">Resultado</p>
+              <p class="xl:text-3xl font-semibold text-blue-700 max-xl:auto">Resultado</p>
               <canvas id="shareAmountChart" class="w-full h-full "></canvas> 
             <!---->
             </div>
 
             <div class="h-[56%] flex flex-col items-center pb-10 mb-5">
-              <p class="text-2xl font-semibold text-blue-700 pt-5">Progressão</p>
+              <p class="xl:text-3xl font-semibold text-blue-700 pt-5">Progressão</p>
               <canvas id="growthAmountChart" class="w-full m-2 sm:m-4 md:m-6 lg:m-8 xl:m-5"></canvas>
             </div>
         </section>
