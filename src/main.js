@@ -4,7 +4,7 @@ import { createTable } from "./table.js";
 import {cleanTables}from"./table.js";
 import { fillInthenBlanks } from "./testMode.js";
 import { createDoughnutChart, createProgressionChart } from "./chartCreator.js";
-
+document.addEventListener("DOMContentLoaded",()=>{responsiveForm()});
 
 const toggleSwitch=document.getElementById("toggleSwitch");
 const aside=document.getElementsByTagName('aside');
@@ -165,8 +165,13 @@ window.addEventListener("resize",()=>{
         }
         lastHeight=window.innerHeight;
     },100);
-    
 }
+    responsiveForm();
+    
+});
+
+function responsiveForm() {
+
     const infoBlocks= form.querySelectorAll('div[name="infoBlock"]');
     infoBlocks.forEach(info => {
         
@@ -218,11 +223,11 @@ window.addEventListener("resize",()=>{
             }
                btnClear.style.fontSize="16px";
                btnCalculate.style.fontSize="16px";               
-               btnCalculate.classList.remove("h-6")
-               btnCalculate.classList.add("h-10")
-               btnClear.classList.remove("h-6")
-               btnClear.classList.add("h-10")}
-});
-
+               btnCalculate.classList.remove("h-6");
+               btnCalculate.classList.add("h-10");
+               btnClear.classList.remove("h-6");
+               btnClear.classList.add("h-10");             
+    }
 })
+}
 

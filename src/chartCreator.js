@@ -30,22 +30,22 @@ export function createDoughnutChart(ctx, investedAmount, returnAmount, fee,netVa
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            layout: { padding: {
-                    left: 0,
-                    right:window.innerWidth/10,
-                    top:window.innerHeight/200,
-                    bottom:window.innerHeight/200*20}},
+            layout: { 
+                padding:{                                                      
+                    right:function(){return innerWidth<innerHeight?innerWidth/150:innerWidth/5},
+                    bottom:innerHeight>600 && innerWidth<=500?5:20,     
+                    top:innerHeight>600 && innerWidth<=500?5:10     
+                         }
+                    },
             plugins: {
                 legend: {
-                    position: "left",
+                    position: function(){return innerWidth>innerHeight?"left":"bottom"},
                     labels: {
                         usePointStyle: true,
-                        pointStyle: "circle",             
-                         padding:innerWidth>1300?innerWidth/130:innerWidth>900?innerWidth/100:innerWidth>600?innerWidth/100:innerWidth/100,
-
-                         font: { size: innerHeight>800?innerHeight/80:innerHeight>640?innerHeight/60:innerHeight>440?innerHeight/60:innerHeight/80},
-
-
+                        pointStyle: "circle",
+                        padding: function(){return innerHeight>400?15:5},
+                        font: { size: innerHeight>500?innerHeight/60:innerHeight/40},
+                         
                         generateLabels: function (chart) {
                             const data = chart.data;                                                        
                             const labels = data.labels.map((label, i) => {
@@ -158,7 +158,7 @@ export function createProgressionChart(ctx, returnsArray, currencyApplyMix) {
                     labels: {
                         color: "#333",
                         font: {
-                            size: 14,
+                            size: innerHeight>400?14:10,
                             weight: "bold"
                         }
                     }
