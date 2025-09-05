@@ -60,13 +60,13 @@ export function createDoughnutChart(ctx, investedAmount, returnAmount, fee,netVa
                             });
                             labels.push({
                                 text: `Total Líquido: R$ ${currencyApplyMix(netValue, true)}`,                                
-                                fillStyle: "#5d8ef0", // Sem cor na bolinha
+                                fillStyle: "transparent", 
                                 strokeStyle: "#5d8ef0",
                                 pointStyle: "",
 
                             }); labels.push({
                                 text: `Total Bruto: R$ ${currencyApplyMix(grossValue, true)}`,                                
-                                fillStyle: "indigo", // Sem cor na bolinha
+                                fillStyle: "transparent",
                                 strokeStyle: "indigo",
                                 pointStyle: ""
 
